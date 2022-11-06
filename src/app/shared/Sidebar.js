@@ -1,119 +1,22 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {Collapse} from 'react-bootstrap';
+import React, {useState,useEffect} from 'react';
+import {Link, useLocation} from 'react-router-dom';
 import {Trans} from 'react-i18next';
 
-class Sidebar extends Component {
+function Sidebar() {
+    const location = useLocation()
 
-    state = {};
-
-    toggleMenuState(menuState) {
-        if (this.state[menuState]) {
-            console.log(menuState, 1)
-            this.setState({[menuState]: false});
-        } else if (Object.keys(this.state).length === 0) {
-            console.log(menuState, 2)
-            this.setState({[menuState]: true});
-        } else {
-            Object.keys(this.state).forEach(i => {
-                console.log(i, '3')
-                this.setState({[i]: false});
-            });
-            this.setState({[menuState]: true});
-        }
+    const isPathActive = (path) => {
+        console.log(path)
+        return location.pathname.startsWith(path);
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.location !== prevProps.location) {
-            this.onRouteChanged();
-        }
-    }
+    useEffect(() => {
+        onRouteChanged()
+    }, [location]);
 
-    onRouteChanged() {
+    const onRouteChanged = () => {
         document.querySelector('#sidebar').classList.remove('active');
-        Object.keys(this.state).forEach(i => {
-            this.setState({[i]: false});
-        });
 
-        const dropdownPaths = [
-            {path: '/apps', state: 'appsMenuOpen'},
-            {path: '/user-pages', state: 'userPagesMenuOpen'},
-            {path: '/general-pages', state: 'generalPagesMenuOpen'},
-        ];
-
-        dropdownPaths.forEach((obj => {
-            if (this.isPathActive(obj.path)) {
-                this.setState({[obj.state]: true})
-            }
-        }));
-
-    }
-
-    render() {
-        return (
-            <nav className="sidebar sidebar-offcanvas" id="sidebar">
-                <ul className="nav">
-                    <li className="nav-item nav-profile">
-                        <a href="!#" className="nav-link" onClick={evt => evt.preventDefault()}>
-                            <div className="nav-profile-image">
-                                <img src={require("../../assets/images/faces/face1.jpg")} alt="profile"/>
-                                <span
-                                    className="login-status online"></span> {/* change to offline or busy as needed */}
-                            </div>
-                            <div className="nav-profile-text">
-                                <span className="font-weight-bold mb-2"><Trans>David Grey. H</Trans></span>
-                                <span className="text-secondary text-small"><Trans>Project Manager</Trans></span>
-                            </div>
-                        </a>
-                    </li>
-                    <li className={this.isPathActive('/dashboard') ? 'nav-item active' : 'nav-item'}>
-                        <Link className="nav-link" to="/dashboard">
-                            <span className="menu-title"><Trans>Dashboard</Trans></span>
-                            <i className="mdi mdi-home menu-icon"></i>
-                        </Link>
-                    </li>
-                    <li className={this.isPathActive('/user-pages') ? 'nav-item active' : 'nav-item'}>
-                        <div className={this.state.userPagesMenuOpen ? 'nav-link menu-expanded' : 'nav-link'}
-                             onClick={() => this.toggleMenuState('userPagesMenuOpen')} data-toggle="collapse">
-                            <span className="menu-title"><Trans>User Pages</Trans></span>
-                            <i className="menu-arrow"></i>
-                            <i className="mdi mdi-lock menu-icon"></i>
-                        </div>
-                        <Collapse in={this.state.userPagesMenuOpen}>
-                            <ul className="nav flex-column sub-menu">
-                                <li className="nav-item"><Link
-                                    className={this.isPathActive('/user-pages/login-1') ? 'nav-link active' : 'nav-link'}
-                                    to="/user-pages/login-1"><Trans>Login</Trans></Link></li>
-                            </ul>
-                        </Collapse>
-                    </li>
-                    <li className={this.isPathActive('/general-pages') ? 'nav-item active' : 'nav-item'}>
-                        <div className={this.state.generalPagesMenuOpen ? 'nav-link menu-expanded' : 'nav-link'}
-                             onClick={() => this.toggleMenuState('generalPagesMenuOpen')} data-toggle="collapse">
-                            <span className="menu-title"><Trans>General Pages</Trans></span>
-                            <i className="menu-arrow"></i>
-                            <i className="mdi mdi-medical-bag menu-icon"></i>
-                        </div>
-                        <Collapse in={this.state.generalPagesMenuOpen}>
-                            <ul className="nav flex-column sub-menu">
-                                <li className="nav-item"><Link
-                                    className={this.isPathActive('/general-pages/blank-page') ? 'nav-link active' : 'nav-link'}
-                                    to="/general-pages/blank-page"><Trans>Blank Page</Trans></Link></li>
-                            </ul>
-                        </Collapse>
-                    </li>
-                </ul>
-            </nav>
-        );
-    }
-
-    isPathActive(path) {
-        // return this.props.location.pathname.startsWith(path);
-    }
-
-    componentDidMount() {
-        this.onRouteChanged();
-        // add class 'hover-open' to sidebar navitem while hover in sidebar-icon-only menu
         const body = document.querySelector('body');
         document.querySelectorAll('.sidebar .nav-item').forEach((el) => {
 
@@ -129,6 +32,46 @@ class Sidebar extends Component {
             });
         });
     }
+
+    return (
+        <nav className="sidebar sidebar-offcanvas" id="sidebar">
+            <ul className="nav">
+                <li className="nav-item nav-profile">
+                    <a href="!#" className="nav-link" onClick={evt => evt.preventDefault()}>
+                        <div className="nav-profile-image">
+                            <img src={require("../../assets/images/faces/face1.jpg")} alt="profile"/>
+                            <span
+                                className="login-status online"></span> {/* change to offline or busy as needed */}
+                        </div>
+                        <div className="nav-profile-text">
+                            <span className="font-weight-bold mb-2"><Trans>David Grey. H</Trans></span>
+                            <span className="text-secondary text-small"><Trans>Project Manager</Trans></span>
+                        </div>
+                    </a>
+                </li>
+                <li className={isPathActive('/dashboard') ? 'nav-item active' : 'nav-item'}>
+                    <Link className="nav-link" to="/dashboard">
+                        <span className="menu-title"><Trans>Dashboard</Trans></span>
+                        <i className="mdi mdi-home menu-icon"></i>
+                    </Link>
+                </li>
+
+                <li className={isPathActive('/user-pages/login-1') ? 'nav-item active' : 'nav-item'}>
+                    <Link className="nav-link" to="/user-pages/login-1">
+                        <span className="menu-title"><Trans>Login</Trans></span>
+                        <i className="mdi mdi-home menu-icon"></i>
+                    </Link>
+                </li>
+
+                <li className={isPathActive('/general-pages/blank-page') ? 'nav-item active' : 'nav-item'}>
+                    <Link className="nav-link" to="/general-pages/blank-page">
+                        <span className="menu-title"><Trans>blank page</Trans></span>
+                        <i className="mdi mdi-home menu-icon"></i>
+                    </Link>
+                </li>
+            </ul>
+        </nav>
+    );
 
 }
 

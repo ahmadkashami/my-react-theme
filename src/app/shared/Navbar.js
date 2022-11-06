@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Trans } from 'react-i18next';
 
 class Navbar extends Component {
-  toggleOffcanvas() {
+  toggleOffCanvas() {
     document.querySelector('.sidebar-offcanvas').classList.toggle('active');
   }
   toggleRightSidebar() {
@@ -172,7 +172,7 @@ class Navbar extends Component {
                 </button>
               </li>
             </ul>
-            <button className="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" onClick={this.toggleOffcanvas}>
+            <button className="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" onClick={this.toggleOffCanvas}>
               <span className="mdi mdi-menu"></span>
             </button>
           </div>
