@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {Link, useLocation} from 'react-router-dom';
 import {Trans} from 'react-i18next';
 
@@ -41,14 +41,6 @@ function Sidebar() {
                         <i className="mdi mdi-home menu-icon"></i>
                     </Link>
                 </li>
-
-                <li className={isPathActive('/user-pages/login-1') ? 'nav-item active' : 'nav-item'}>
-                    <Link className="nav-link" to="/user-pages/login-1">
-                        <span className="menu-title"><Trans>Login</Trans></span>
-                        <i className="mdi mdi-home menu-icon"></i>
-                    </Link>
-                </li>
-
                 <li className={isPathActive('/general-pages/blank-page') ? 'nav-item active' : 'nav-item'}>
                     <Link className="nav-link" to="/general-pages/blank-page">
                         <span className="menu-title"><Trans>blank page</Trans></span>
