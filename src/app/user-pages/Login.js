@@ -36,7 +36,7 @@ export class Login extends Component {
                     <a href="!#" onClick={event => event.preventDefault()} className="auth-link text-black">Forgot password?</a>
                   </div>
                   <div className="text-center mt-4 font-weight-light">
-                    Don't have an account? <Link to="/user-pages/register" className="text-primary">Create</Link>
+                    Don't have an account? <Link to="/register" className="text-primary">Create</Link>
                   </div>
                 </Form>
               </div>

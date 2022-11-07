@@ -16,8 +16,8 @@ function AppRoutes ()  {
       <Suspense fallback={<Spinner/>}>
         <Routes>
           <Route  path="/dashboard" element={ <Dashboard/> } />
-          <Route path="/user-pages/login" element={ <Login/> } />
-          <Route path="/user-pages/register" element={ <Register/> } />
+          <Route path="/login" element={ <Login/> } />
+          <Route path="/register" element={ <Register/> } />
           <Route path="/general-pages/blank-page" element={ <BlankPage/> } />
             <Route element={<Navigate to="/competition" />} ></Route>
         </Routes>

@@ -15,8 +15,8 @@ function App() {
     const onRouteChanged = () => {
         window.scrollTo(0, 0);
         const fullPageLayoutRoutes = [
-            '/user-pages/login',
-             '/user-pages/register',
+            '/login',
+             '/register',
             // '/user-pages/lockscreen',
             // '/error-pages/error-404',
             // '/error-pages/error-500',
