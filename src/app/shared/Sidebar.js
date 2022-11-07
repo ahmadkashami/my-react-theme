@@ -37,14 +37,14 @@ function Sidebar() {
             <ul className="nav">
                 <li className={isPathActive('/dashboard') ? 'nav-item active' : 'nav-item'}>
                     <Link className="nav-link" to="/dashboard">
+                        <i className="mdi mdi-home menu-icon mr-2"></i>
                         <span className="menu-title"><Trans>Dashboard</Trans></span>
-                        <i className="mdi mdi-home menu-icon"></i>
                     </Link>
                 </li>
                 <li className={isPathActive('/general-pages/blank-page') ? 'nav-item active' : 'nav-item'}>
                     <Link className="nav-link" to="/general-pages/blank-page">
+                        <i className="mdi mdi-file menu-icon mr-2"></i>
                         <span className="menu-title"><Trans>blank page</Trans></span>
-                        <i className="mdi mdi-home menu-icon"></i>
                     </Link>
                 </li>
             </ul>

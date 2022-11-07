@@ -30,7 +30,6 @@
       }
 
       .nav-link {
-        @include display-flex;
         @include align-items(center);
         white-space: nowrap;
         padding:$sidebar-menu-padding-y 0 $sidebar-menu-padding-y 0;
@@ -111,7 +110,7 @@
         .nav-link {
           .menu-title {
             color: $sidebar-light-menu-active-color;
-            font-weight: $font-weight-medium;         
+            font-weight: $font-weight-medium;
           }
           i {
             color: theme-color(primary);
